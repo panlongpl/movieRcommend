@@ -1,0 +1,87 @@
+{% load static %}
+<style type="text/css">
+body {
+    background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: beige;
+}
+    a {
+        color: beige;
+        text-decoration: none;
+    }
+
+    ul li{
+        list-style-type: none;
+        line-height: 50px;
+    }
+
+    .left{
+        #background-color: #1b6d85;
+        width: 20%;
+        height: 650px;
+        float: left;
+    }
+    .right{
+        #background-color: #1CBF11;
+        width: 80%;
+        float:right;
+        height: auto;
+    }
+
+    .showMovie{
+        float: left;
+        text-align: center;
+        line-height: 2px;
+        margin: 20 ;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电影推荐</title>
+</head>
+<body>
+    <a href="{% url 'myauth:index' %}">返回主页</a>
+    <h1>以下是为你推荐的电影，希望你喜欢</h1>
+
+    <div class="left">
+        <ul>
+            <li><a href="{% url 'myauth:hot' %}">热门推荐</a>></li>
+            <li><a href="{% url 'myauth:recommd1' %}">量身定制一</a>></li>
+            <li><a href="{% url 'myauth:recommd2' %}">量身定制二</a>></li>
+            <li><a href="{% url 'myauth:recommd3' %}">量身定制三</a>></li>
+
+        </ul>
+    </div>
+
+    <div class="right">
+        <div class="tab-content">
+            <div class="row">
+                <div class="co-sm">
+                {% if data %}
+                    {% for x in data %}<div class="showMovie">
+                        <img src="{{ x.movie_poster }}" width="200px" height="300px">
+                         <form action="{% url 'myauth:showMovie' %}" method="post">
+                           {% csrf_token %}
+                           <input type="hidden" value={{ x.movie_name }} name="movie_name">
+                           <button type="submit">
+                           {{ x.movie_name }}
+                       </form>
+                        <h4>评分:{{ x.movie_point }}</h4>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>抱歉，你还没有对任何电影作出评分，因此无法为你推荐属于你的电影<p>
+                    <p>建议你去可以去看看热门电影并作出评分，以便下次为你准确推荐<p>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

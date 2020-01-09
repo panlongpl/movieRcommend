@@ -1,0 +1,40 @@
+{% load static %}
+<style type="text/css">
+body {
+    background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: beige;
+}
+    a {
+        color: beige;
+        text-decoration: none;
+    }
+
+    .show{
+        margin: 200px 600px ;
+        color: red;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户须知</title>
+</head>
+<body>
+    <a href="{% url 'myauth:index' %}">返回主页</a>
+    <div class="show">
+        <li>一 此网站必须登录才能使用</li>
+        <li>二 登录网站后你可以浏览不同类型的电影并对这些电影进行评分</li>
+        <li>三 作为新用户，系统无法为你推荐准确的电影，但是可以浏览热门的电影</li>
+        <li>四 网站后台会收集你的浏览信息以为你准确推荐电影</li>
+        <li>五 因为后台数据较大，当你查看推荐电影时可能不能及时响应。为你带来的不愉悦的体验，敬请理解</li>
+        <li>六 请勿频繁刷新页面，以给服务器造成巨大压力</li>
+        <li>七 你的支持，是我们进步的最大动力，感谢支持！！！</li>
+    </div>
+</body>
+</html>

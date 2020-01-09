@@ -1,0 +1,10 @@
+ .left{
+     width: 320px;
+     height: 874px;
+     background: yellow;
+ }
+ .right{
+     width: 220px;
+     height: 50px;
+     background: #1CBF11;
+ }

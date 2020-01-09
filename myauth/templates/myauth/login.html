@@ -1,0 +1,46 @@
+{% load static %}
+<style type="text/css">
+    body {
+        background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        color: beige;
+    }
+    ul li{
+       list-style: none;
+    }
+    a{
+        color: beige;
+    }
+    .error{
+        color: red;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+<div style="text-align: center">
+     <h1>登录</h1>
+    <a href="{% url 'myauth:index' %}">回到主页</a>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="error">{{ 错误 }}</div>
+        <ul>
+            <li>用户名：<input type="text" name="username" placeholder="用户名"></li>
+            <br>
+            <li>密码：<input type="password" name="password" placeholder="密码"></li>
+            <br>
+        <button type="submit">提交</button>
+        </ul>
+    </form>
+    &emsp;&emsp;<a href="{% url 'myauth:register' %}">注册</a>
+</div>
+</body>
+</html>

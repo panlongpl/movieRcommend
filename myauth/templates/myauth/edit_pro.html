@@ -1,0 +1,45 @@
+{% load static %}
+<style type="text/css">
+    body {
+        background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        color: beige;
+    }
+a{
+    color: beige;
+}
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>个人中心</h1>
+    <a href="{% url 'myauth:index' %}">回到主页</a>
+    <a href="{% url 'myauth:user_center' %}">个人中心</a>
+    <a href="{% url 'myauth:edit_pro' %}">编辑个人信息</a>
+    <a href="{% url 'myauth:user_change_pass' %}">修改密码</a>
+    <a href="{% url 'myauth:slogout' %}">登出</a>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <p><label for="id_username">用户名:</label> <input type="text" name="username" value="{{ user.username }}" maxlength="150"
+                                                        required id="id_username"> <span class="helptext">必填。150个字符或者更少。包含字母，数字和仅有的@/./+/-/_符号。</span>
+        </p>
+        <p><label for="id_email">电子邮件地址:</label> <input type="email" name="email" value="{{ user.email }}"
+                                                        maxlength="254" id="id_email"></p>
+        <p><label for="id_nikname">Nikname:</label> <input type="text" name="nikname" maxlength="50" required
+                                                           id="id_nikname" value="{{ user.commuser.nikname }}"></p>
+        <p><label for="id_birthday">Birthday:</label> <input type="date" name="birthday" required id="id_birthday" value="{{ user.commuser.birthday }}"></p>
+        <button type="submit">提交</button>
+    </form>
+</div>
+</body>
+</html>

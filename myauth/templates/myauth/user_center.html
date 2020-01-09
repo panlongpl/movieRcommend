@@ -1,0 +1,35 @@
+{% load static %}
+<style type="text/css">
+body {
+    background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: beige;
+}
+    a{
+        color: beige;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>个人中心</h1>
+    <a href="{% url 'myauth:index' %}">回到主页</a>
+    <a href="{% url 'myauth:edit_pro' %}">编辑个人信息</a>
+    <a href="{% url 'myauth:user_change_pass' %}">修改密码</a>
+    <a href="{% url 'myauth:slogout' %}">登出</a>
+    <div>
+        <p>用户名：{{ user.username }}</p>
+        <p>邮箱：{{ user.email }}</p>
+        <p>昵称：{{ user.commuser.nikname }}</p>
+        <p>生日：{{ user.commuser.birthday }}</p>
+    </div>
+</body>
+</html>

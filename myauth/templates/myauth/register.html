@@ -1,0 +1,60 @@
+{% load static %}
+<style type="text/css">
+    body {
+        background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        color: beige;
+    }
+    ul li{
+       list-style: none;
+    }
+    a{
+        color: beige;
+    }
+    .main {
+        width: 30%;
+        height: 60%;
+        margin: 0 auto;
+        text-align: left;
+
+    }
+    .error{
+        color: red;
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main">
+    <h1>注册</h1>
+    <a href="{% url 'myauth:index' %}">回到主页</a>
+    {% if registerform.errors %}
+        <div class="error">{{ registerform.errors }}</div>
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <p><label for="id_username">用户名:</label> <input type="text" name="username" maxlength="150" autofocus required id="id_username"> <span class="helptext">必填。150个字符或者更少。包含字母，数字和仅有的@/./+/-/_符号。</span>
+        </p>
+        <p><label for="id_password1">密码:</label> <input type="password" name="password1" required id="id_password1">
+            <span class="helptext"><ul><li>你的密码不能与其他个人信息太相似。</li><li>你的密码必须包含至少 8 个字符。</li><li>你的密码不能是大家都爱用的常见密码。</li><li>你的密码不能全部为数字。</li></ul></span>
+        </p>
+        <p><label for="id_password2">密码确认:</label> <input type="password" name="password2" required id="id_password2">
+            <span class="helptext">为了校验，请输入与上面相同的密码。</span></p>
+        <p><label for="id_email">电子邮件地址:</label> <input type="email" name="email" maxlength="254" id="id_email"></p>
+        <p><label for="id_nikname">Nikname:</label> <input type="text" name="nikname" maxlength="50" required
+                                                           id="id_nikname"></p>
+        <p><label for="id_birthday">Birthday:</label> <input type="date" name="birthday" required id="id_birthday"></p>
+        <button type="submit">注册</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+{% load static %}
+<style type="text/css">
+body {
+    background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: beige;
+}
+    a {
+        color: beige;
+        text-decoration: none;
+    }
+
+    .wrapper {
+            border: 1px solid #000;
+        }
+        .wrapper ul {
+            display: table;		 /*这里是关键步骤：*/
+            margin: 0 auto;      /*让ul在div中水平居中 */
+             list-style: none;
+        }
+        .wrapper ul::after {     /*清除浮动 */
+            content: '';
+            display: inline-block;
+            clear: both;
+        }
+        .wrapper ul li {
+            float: left;         /*让li浮动起来 横向排列*/
+            text-align: center;  /*让li在ul中水平居中*/
+            height: 40px;
+            line-height: 40px;   /*垂直居中*/
+            width: 140px;        /*任意设置li的宽度，不设置宽度的话也可以设置padding*/
+        }
+
+     .movie {
+            border: 1px solid #000;
+        }
+        .movie ul {
+            display: table;		 /*这里是关键步骤：*/
+            margin: 0 auto;      /*让ul在div中水平居中 */
+            list-style: none;
+            height: 500px;
+        }
+        .movie ul::after {     /*清除浮动 */
+            content: '';
+            display: inline-block;
+            clear: both;
+        }
+        .movie ul li {
+            float: left;         /*让li浮动起来 横向排列*/
+            text-align: center;  /*让li在ul中水平居中*/
+            height: 40px;
+            line-height: 40px;   /*垂直居中*/
+            width: 270px;        /*任意设置li的宽度，不设置宽度的话也可以设置padding*/
+        }
+
+        .showMovie{
+            float: left;
+            text-align: center;
+        }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电影推荐</title>
+    <style>
+       .left {
+           width: 20%;
+           height: 200px;
+           #background: #CCC;
+           position: absolute;
+           left: 0;
+           top: 0;
+       }
+
+       .middle {
+           height: 200px;
+           #background: #9CF;
+           margin: -14% 25% 0 20%;
+       }
+
+       .right {
+           width: 25%;
+           height: 200px;
+           #background: #FCC;
+           position: absolute;
+           right: 0;
+           top: 0;
+           text-align: center;
+       }
+
+       .right_search {
+            position: relative;
+            top: 80px;
+            float: left;
+            left: 300px;
+        }
+        .recommd{
+            position: relative;
+            top: 80px;
+            float: left;
+        }
+        </style>
+</head>
+<body>
+<div class="left" style="position: relative">
+    <h1>电影网</h1>
+    {% if user.is_authenticated %}
+        <h3>欢迎你：{{ user.username }}</h3>
+        <a href="{% url 'myauth:slogout' %}">登出</a>
+        <a href="{% url 'myauth:user_center' %}">个人中心</a>
+        <br>
+        <a href="{% url 'myauth:noticeUser' %}">用户告知</a>
+    {% else %}
+        <a href="{% url 'myauth:slogin' %}">登录</a>
+        <a href="{% url 'myauth:register' %}">注册</a>
+    {% endif %}
+</div>
+<div class="middle" style="position: relative">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0" method="post" action="{% url 'myauth:showMovie' %}">
+            {% csrf_token %}
+          <div class="right_search"><input class="form-control mr-sm-2" name="movie_name" type="search" placeholder="请输入电影名" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button></div>
+        </form>
+      </div>
+    </nav>
+</div>
+<div class="right">
+    <div class="recommd"><a href="{% url 'myauth:hot' %}">查看推荐 &emsp;</a>
+    <a href="{% url 'myauth:NEW_movie' %}">最新电影</a></div>
+</div>
+
+</br>
+
+{% if error %}
+    <script>
+        alert('请输入0到10之间的数据')
+    </script>
+{% endif %}
+
+{#电影导航#}
+ <div class="wrapper">
+        <ul>
+            <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="动作" name="info">
+                <button type="submit">动作</button>
+            </form></li>
+
+            <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="剧情" name="info">
+                <button type="submit">剧情</button>
+            </form></li>
+
+           <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="爱情" name="info">
+                <button type="submit">爱情</button>
+            </form></li>
+
+            <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="喜剧" name="info">
+                <button type="submit">喜剧</button>
+            </form></li>
+
+            <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="动画" name="info">
+                <button type="submit">动画</button>
+            </form></li>
+
+           <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="科幻" name="info">
+                <button type="submit">科幻</button>
+            </form></li>
+
+            <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="犯罪" name="info">
+                <button type="submit">犯罪</button>
+            </form></li>
+
+            <li><form action="" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="恐怖" name="info">
+                <button type="submit">恐怖</button>
+            </form></li>
+        </ul>
+ </div>
+
+
+ <div class="movie">
+        <ul>
+           {% for x in data %}
+               <div class="showMovie">
+                   <div class="card" style="width: 18rem;">
+                       <img src="{{ x.movie_poster }}" class="card-img-top" alt="..." width="200px" height="300px">
+                       <form action="{% url 'myauth:showMovie' %}" method="post">
+                           {% csrf_token %}
+                           <input type="hidden" value={{ x.movie_name }} name="movie_name">
+                           <button type="submit">
+                           {{ x.movie_name }}
+                       </form>
+                   </div>
+                   <h4>大众评分：{{ x.movie_point }}</h4>
+                 <form action="" method="post">
+                       {% csrf_token %}
+                         <input type="hidden" value={{ x.id }} name="movie_id">
+                        <input type="hidden" value="{{ type }}" name="info">
+                        <input type="number" step="0.1" name="Score" placeholder="请输入你的评分" />
+                       <button type="submit" class="submit_button" onclick="submitAction">提交评分</button>
+                   </form>
+               </div>
+           {% endfor %}
+        </ul>
+ </div>
+<br>
+
+<script>
+    var obj = get
+</script>
+</body>
+</html>

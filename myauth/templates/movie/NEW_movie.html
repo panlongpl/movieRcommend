@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>最新推荐</title>
+    <style type="text/css">
+        body {
+            background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            color: beige;
+        }
+        .main{
+            text-align: center;
+            font-size: 24px;
+        }
+        .Table{
+            text-align: center;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="main">最新电影推荐</div>
+<table class="Table">
+    <tr>
+        <th>电影名称</th>
+        <th>导演</th>
+        <th>评分</th>
+    </tr>
+    {% for x in data %}
+        <tr>
+            <td>{{ x.titles }}</td>
+            <td>{{ x.director }}</td>
+            <td>{{ x.score}}</td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

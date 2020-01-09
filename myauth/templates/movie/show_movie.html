@@ -1,0 +1,64 @@
+{% load static %}
+<style type="text/css">
+body {
+    background-image: url("{% static 'img/showMovie/movieback3.jpg' %}");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+    a{
+        color: beige;
+    }
+
+    .container{
+
+    }
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电影信息</title>
+</head>.
+<body>
+    {% if error %}
+        <script>
+            alert('请输入0到10之间的数据')
+        </script>
+    {% endif %}
+    <a href="{% url 'myauth:index' %}">返回主页</a>
+    <a href="{% url 'myauth:hot' %}">电影推荐</a>
+    {% if data %}
+        <div class="container">
+            <form action="" method="post">
+                {% csrf_token %}
+                {% for x in data %}
+                <input type="hidden" value={{ x.id }} name="movie_id">
+                <input type="number" step="0.1" name="Score" placeholder="为此电影评分"/>
+                <button type="submit">提交评分</button>
+                {% endfor %}
+            </form>
+        </div>
+        <div style="text-align: center; color: navajowhite">
+            {% for d in data %}
+                <h2>{{ d.movie_name }}</h2>
+                <img src="{{ d.movie_poster }}"/>
+                <h4>导演：{{ d.movie_director }}</h4>
+                <h4>主演：{{ d.movie_Starring }}</h4>
+                <h4>类型：{{ d.movie_type }}</h4>
+                <h4>评分：{{ d.movie_point }}</h4>
+                <h4>描述：{{ d.movie_description }}</h4>
+
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-success" role="alert" style="color: red;text-align: center">
+            <h4 class="alert-heading">很抱歉</h4>
+            <p>没有找到你想要的资源，请确认你搜索的电影是否存在！！！</p>
+           <p class="mb-0">或者换一部影片试试看</p>
+        </div>
+    {% endif %}
+</body>
+</html>
